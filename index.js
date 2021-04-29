@@ -124,13 +124,16 @@ io.on('connection', function (client) {
     io.emit("online",data.userId);
     // console.log(onlineUers);
   })
-  // client.on('getOnline', function  name(data) {
-  //   //onlineUers[client.id] = data.userId;
-  //   onlineUers.set(client.id,data.userId);
-  //   //console.log(onlineUers);
-  //   io.emit('OS',onlineUers.has(data.userId));
-  //    console.log(onlineUers);
-  // })
+
+  
+    client.on('setWorking', function  name(data) {
+    //onlineUers[client.id] = data.userId;
+     onlineUers.set(client.id,data.userId);
+    //console.log(onlineUers);
+    io.emit("working",data.userId);
+    // console.log(onlineUers);
+  })
+  
   client.on('disconnect', function () {
     console.log('client disconnect...', client.id)
     // handleDisconnect()
