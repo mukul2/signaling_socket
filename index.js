@@ -76,6 +76,41 @@ io.on('connection', function (client) {
 
 
 
+  client.on('offerNneedAnswer', function  name(data) {
+    //onlineUers[client.id] = data.userId;
+     io.emit("any","offerNneedAnswer");
+    //console.log(onlineUers);
+    io.emit("offerNneedAnswer"+data.id,data.offer);
+     console.log("offerNneedAnswer "+data.offer);
+  })
+
+
+
+  client.on('offerNasResponse', function  name(data) {
+    //onlineUers[client.id] = data.userId;
+     io.emit("any","offerNasResponse");
+    //console.log(onlineUers);
+    io.emit("offerNasResponse"+data.id,data.offer);
+     console.log("offerNasResponse "+data.offer);
+  })
+
+
+  client.on('answerNasResponse', function  name(data) {
+    //onlineUers[client.id] = data.userId;
+     io.emit("any","answerNasResponse");
+    //console.log(onlineUers);
+    io.emit("answerNasResponse"+data.id,data.answer);
+     console.log("answerNasResponse "+data.answer);
+  })
+
+  client.on('answerNeedOffer', function  name(data) {
+    //onlineUers[client.id] = data.userId;
+     io.emit("any","answerNeedOffer");
+    //console.log(onlineUers);
+    io.emit("answerNeedOffer"+data.id,data.answer);
+     console.log("answerNeedOffer "+data.answer);
+  })
+
 
 
   client.on('offerN', function  name(data) {
@@ -113,7 +148,20 @@ io.on('connection', function (client) {
     io.emit("reject"+data.id,data.id);
      console.log("reject "+data.id);
   })
-
+  client.on('callEnd', function  name(data) {
+    //onlineUers[client.id] = data.userId;
+     io.emit("any","any");
+    //console.log(onlineUers);
+    io.emit("callEnd"+data.id,data.id);
+     console.log("callEnd "+data.id);
+  })
+  client.on('callCanceled', function  name(data) {
+    //onlineUers[client.id] = data.userId;
+     io.emit("any","callCanceled");
+    //console.log(onlineUers);
+    io.emit("callCanceled"+data.id,data.id);
+     console.log("callCanceled "+data.id);
+  })
 
   client.on('connect', function () {
   })
@@ -124,16 +172,13 @@ io.on('connection', function (client) {
     io.emit("online",data.userId);
     // console.log(onlineUers);
   })
-
-  
-    client.on('setWorking', function  name(data) {
-    //onlineUers[client.id] = data.userId;
-     onlineUers.set(client.id,data.userId);
-    //console.log(onlineUers);
-    io.emit("working",data.userId);
-    // console.log(onlineUers);
-  })
-  
+  // client.on('getOnline', function  name(data) {
+  //   //onlineUers[client.id] = data.userId;
+  //   onlineUers.set(client.id,data.userId);
+  //   //console.log(onlineUers);
+  //   io.emit('OS',onlineUers.has(data.userId));
+  //    console.log(onlineUers);
+  // })
   client.on('disconnect', function () {
     console.log('client disconnect...', client.id)
     // handleDisconnect()
